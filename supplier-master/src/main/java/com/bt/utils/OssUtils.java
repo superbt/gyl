@@ -20,7 +20,7 @@ public class OssUtils {
     public static String uploadFileAvatar(MultipartFile file) {
         try{
             // 创建OSSClient实例。
-            OSS ossClient = new OSSClientBuilder().build(Constant.ENDPOINT,Constant.KEY_ID,Constant.KEY_SECRET);
+           // OSS ossClient = new OSSClientBuilder().build(Constant.ENDPOINT,Constant.KEY_ID,Constant.KEY_SECRET);
 
             // 获取上传文件的输入流
             InputStream inputStream = file.getInputStream();
@@ -42,10 +42,10 @@ public class OssUtils {
             //第一个参数 Bucket名称
             //第二个参数  上传到OSS文件路径和文件名称
             //第三个参数  上传文件输入流
-            ossClient.putObject(Constant.BUCKET_NAME, filename, inputStream);
+           // ossClient.putObject(Constant.BUCKET_NAME, filename, inputStream);
 
             // 关闭OSSClient。
-            ossClient.shutdown();
+            //ossClient.shutdown();
 
             //把上传之后文件路径返回
             //需要把上传到阿里云oss路径手动拼接出来

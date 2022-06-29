@@ -3,13 +3,13 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	
+
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="Neon Admin Panel">
 	<meta name="author" content="">
-	
+
 	<title>Neon | Login</title>
-	
+
 
 	<link rel="stylesheet" th:href="@{/css/jquery-ui-1.10.3.custom.min.css}">
 	<link rel="stylesheet" th:href="@{/css/entypo.css}">
@@ -29,8 +29,8 @@
 		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	<![endif]-->
-	
-	
+
+
 </head>
 <body class="page-body login-page login-form-fall" data-url="http://neon.dev">
 
@@ -40,27 +40,27 @@
 </script>
 
 <div class="login-container">
-	
+
 	<div class="login-header login-caret">
-		
+
 		<div class="login-content">
-			
+
 			<a th:href="index.html" class="logo">
 				<img th:src="@{/picture/logo-2x.png}" width="120" alt="">
 			</a>
-			
-			<p class="description">百货中心供应链管理系统竭诚为您服务</p>
-			
+
+			<p class="description">供应链管理系统竭诚为您服务</p>
+
 	</div>
-	
+
 	<div class="login-progressbar">
 		<div></div>
 	</div>
-	
+
 	<div class="login-form">
-		
+
 		<div class="login-content">
-			
+
 			<form role="form" id="form_login" th:action="@{/api/doLogin}"  th:method="post">
 				<input type="hidden" name="_method" value="PUT">
 				<div class="form-group">
@@ -68,21 +68,23 @@
 						<div class="input-group-addon">
 							<i class="entypo-user"></i>
 						</div>
-						
-						<input type="text" class="form-control" name="username" id="username" placeholder="Username" autocomplete="off">
+
+						<input type="text" class="form-control" name="username" id="username"
+							   placeholder="Username" autocomplete="off">
 					</div>
-					
+
 				</div>
 				<div class="form-group">
 					<div class="input-group">
 						<div class="input-group-addon">
 							<i class="entypo-key"></i>
 						</div>
-						<input type="password" class="form-control" name="password" id="password" placeholder="Password" autocomplete="off">
+						<input type="password" class="form-control" name="password" id="password"
+							   placeholder="Password" autocomplete="off">
 					</div>
-				
+
 				</div>
-				
+
 				<div class="form-group">
 					<button type="submit" class="btn btn-primary btn-block btn-login login" onclick="login">
 						<i class="entypo-login"></i>
@@ -92,31 +94,31 @@
 
 			</form>
 			<div class="login-bottom-links">
-				
+
 				<a th:href="extra-forgot-password.html" class="link">如果忘记密码请联系管理员</a>
 				<br>
 			</div>
 		</div>
 	</div>
 </div>
-<!--	<script type="text/javascript">-->
-<!--		function login(){-->
-<!--			$.ajax({-->
-<!--				url: "http://localhost:8080/api/doLogin",-->
-<!--				method: "GET",-->
-<!--				dataType: "JSON",-->
-<!--				data:{-->
-<!--					username: $('#username').val(),-->
-<!--					password: $('#password').val()-->
-<!--				},-->
-<!--				success: function (res){-->
-<!--					if(res !=null){-->
-<!--						console.log("ok")-->
-<!--					}-->
-<!--				}-->
-<!--			})-->
-<!--		}-->
-<!--	</script>-->
+	<script type="text/javascript">
+		function login(){
+			$.ajax({
+				url: "http://localhost:8080/api/doLogin",
+				method: "GET",
+				dataType: "JSON",
+				data:{
+					username: $('#username').val(),
+					password: $('#password').val()
+				},
+				success: function (res){
+					if(res !=null){
+						console.log("ok")
+					}
+				}
+			})
+		}
+	</script>
 
 
 	<!-- Bottom Scripts -->

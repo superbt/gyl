@@ -28,6 +28,7 @@ public class LoginController {
     private RoleUserService roleUserService;
 
 
+
     @RequestMapping("/doLogin")
     public String doLogin(String username, String password, Model model, HttpServletRequest request){
         User user = userService.login(username,password);
