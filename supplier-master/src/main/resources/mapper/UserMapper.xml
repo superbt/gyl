@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bt.mapper.UserMapper">
+
+
+    <update id="updateByUserId" parameterType="com.bt.pojo.User">
+        update s_user
+        set `password` = #{password},
+            `nick_name` = #{nickName},
+            phone = #{phone},
+            email = #{email},
+            email = #{nickName},
+            `status` = #{status},
+            sex = #{sex},
+            update_time = #{updateTime}
+        where id = #{id}
+    </update>
+</mapper>

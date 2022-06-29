@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Neon Admin Panel">
+    <meta name="author" content="">
+
+    <title>Neon | Dashboard</title>
+
+
+    <link rel="stylesheet" th:href="@{/css/jquery-ui-1.10.3.custom.min.css}">
+    <link rel="stylesheet" th:href="@{/css/entypo.css}">
+    <link rel="stylesheet" th:href="@{/css/css.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/neon-core.css}">
+    <link rel="stylesheet" th:href="@{/css/neon-theme.css}">
+    <link rel="stylesheet" th:href="@{/css/neon-forms.css}">
+    <link rel="stylesheet" th:href="@{/css/custom.css}">
+
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+
+    <!--[if lt IE 9]>
+    <script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js} IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+</head>
+<body class="page-body  page-fade" data-url="http://sc.chinaz.com">
+
+<div class="page-container">
+    <!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
+    <div class="sidebar-menu">
+        <header class="logo-env">
+            <!-- logo -->
+            <div class="logo">
+                <a th:href="@{/api/index}">
+                    <img th:src="@{/picture/logo-2x.png}" width="120" alt="">
+                </a>
+            </div>
+            <div class="sidebar-collapse">
+                <a href="#" class="sidebar-collapse-icon with-animation">
+                    <!-- add class "with-animation" if you want sidebar to have animation during expanding/collapsing transition -->
+                    <i class="entypo-menu"></i>
+                </a>
+            </div>
+            <div class="sidebar-mobile-menu visible-xs">
+                <a href="#" class="with-animation"><!-- add class "with-animation" to support animation -->
+                    <i class="entypo-menu"></i>
+                </a>
+            </div>
+        </header>
+        <ul id="main-menu" class="">
+            <!--用户管理-->
+            <!--th:if="${session.list.contains('admin')} and ${session.list.contains('manager')}"-->
+            <li th:if="${session.list.contains('admin')} and ${session.list.contains('manager')}">
+                <a th:href="forms-main.html">
+                    <i class="entypo-doc-text"></i>
+                    <span>用户管理</span>
+                </a>
+                <ul>
+                    <li>
+                        <a th:href="@{/api/users}">
+                            <span>用户列表</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!--角色管理-->
+            <li th:if="${session.list.contains('admin')}">
+                <a th:href="forms-main.html">
+                    <i class="entypo-doc-text"></i>
+                    <span>角色管理</span>
+                </a>
+                <ul>
+                    <li>
+                        <a th:href="@{/api/roles}">
+                            <span>角色列表</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!--商品管理-->
+            <li>
+                <a th:href="forms-main.html">
+                    <i class="entypo-doc-text"></i>
+                    <span>商品管理</span>
+                </a>
+                <ul>
+                    <li>
+                        <a th:href="@{/api/goods}">
+                            <span>商品列表</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/api/categorys}">
+                            <span>分类列表</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/api/orders}">
+                            <span>订单列表</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!--新闻管理-->
+            <li>
+                <a th:href="forms-main.html">
+                    <i class="entypo-doc-text"></i>
+                    <span>新闻管理</span>
+                </a>
+                <ul>
+                    <li>
+                        <a th:href="@{/api/news}">
+                            <span>新闻列表</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <div class="row">
+            <!-- Profile Info and Notifications -->
+            <div class="col-md-6 col-sm-8 clearfix">
+                <ul class="user-info pull-left pull-none-xsm">
+                    <!-- Profile Info -->
+                    <li class="profile-info dropdown">
+                        <!-- add class "pull-right" if you want to place this from right -->
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                            <img th:src="@{${session.user.avatar}}" alt="" class="img-circle" width="44">
+                            <a href="" th:text="${session.user.nickName}"></a>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- Reverse Caret -->
+                            <li class="caret"></li>
+                            <!-- 个人信息 -->
+                            <li>
+                                <a th:href="@{/api/single-center}">
+                                    <i class="entypo-user"></i>
+                                    个人信息
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="entypo-clipboard"></i>
+                                    修改密码
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+
+            <!-- 退出登录 -->
+            <div class="col-md-6 col-sm-4 clearfix hidden-xs">
+                <ul class="list-inline links-list pull-right">
+                    <li>
+                        <a th:href="@{/api/logout}">
+                            退出登录 <i class="entypo-logout right"></i>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="tile-stats tile-green">
+                    <div class="icon"><i class="entypo-chart-bar"></i></div>
+                    <div class="num" data-start="0" data-end="135" data-postfix="" data-duration="1500"
+                         data-delay="600">0
+                    </div>
+
+                    <h3>平台用户数</h3>
+                    <p>this is the average value.</p>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <div class="tile-stats tile-green">
+                    <div class="icon"><i class="entypo-chart-bar"></i></div>
+                    <div class="num" data-start="0" data-end="135" data-postfix="" data-duration="1500"
+                         data-delay="600">0
+                    </div>
+                    <h3>商品总数</h3>
+                    <p>this is the average value.</p>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <div class="tile-stats tile-aqua">
+                    <div class="icon"><i class="entypo-mail"></i></div>
+                    <div class="num" data-start="0" data-end="23" data-postfix="" data-duration="1500"
+                         data-delay="1200">0
+                    </div>
+                    <h3>订单总数</h3>
+                    <p>messages per day.</p>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+
+                <div class="tile-stats tile-blue">
+                    <div class="icon"><i class="entypo-rss"></i></div>
+                    <div class="num" data-start="0" data-end="52" data-postfix="" data-duration="1500"
+                         data-delay="1800">0
+                    </div>
+
+                    <h3>发布新闻公告</h3>
+                    <p>on our site right now.</p>
+                </div>
+
+            </div>
+        </div>
+        <br>
+        <link rel="stylesheet" th:href="@{/css/jquery-jvectormap-1.2.2.css}">
+        <link rel="stylesheet" th:href="@{/css/rickshaw.min.css}">
+
+        <!-- Bottom Scripts -->
+        <script th:src="@{/js/main-gsap.js}"></script>
+        <script th:src="@{/js/jquery-ui-1.10.3.minimal.min.js}"></script>
+        <script th:src="@{/js/bootstrap.js}"></script>
+        <script th:src="@{/js/joinable.js}"></script>
+        <script th:src="@{/js/resizeable.js}"></script>
+        <script th:src="@{/js/neon-api.js}"></script>
+        <script th:src="@{/js/jquery-jvectormap-1.2.2.min.js}"></script>
+        <script th:src="@{/js/jquery-jvectormap-europe-merc-en.js}"></script>
+        <script th:src="@{/js/jquery.sparkline.min.js}"></script>
+        <script th:src="@{/js/d3.v3.js}"></script>
+        <script th:src="@{/js/rickshaw.min.js}"></script>
+        <script th:src="@{/js/raphael-min.js}"></script>
+        <script th:src="@{/js/morris.min.js}"></script>
+        <script th:src="@{/js/toastr.js}"></script>
+        <script th:src="@{/js/neon-chat.js}"></script>
+        <script th:src="@{/js/neon-custom.js}"></script>
+        <script th:src="@{/js/neon-demo.js}"></script>
+
+    </div>
+</div>
+</body>
+</html>

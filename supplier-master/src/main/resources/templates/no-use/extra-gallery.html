@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Neon Admin Panel">
+	<meta name="author" content="">
+	
+	<title>Neon | Gallery</title>
+	
+
+	<link rel="stylesheet" th:href="@{/css/jquery-ui-1.10.3.custom.min.css}">
+	<link rel="stylesheet" th:href="@{/css/entypo.css}">
+	<link rel="stylesheet" th:href="@{/css/css.css}">
+	<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+	<link rel="stylesheet" th:href="@{/css/neon-core.css}">
+	<link rel="stylesheet" th:href="@{/css/neon-theme.css}">
+	<link rel="stylesheet" th:href="@{/css/neon-forms.css}">
+	<link rel="stylesheet" th:href="@{/css/custom.css}">
+
+	<script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+
+	<!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+	<!-- HTML5 shim and Respond.js} IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	
+	
+</head>
+<body class="page-body" data-url="http://neon.dev">
+
+<div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
+
+	<div class="sidebar-menu">
+		<header class="logo-env">
+			<!-- logo -->
+			<div class="logo">
+				<a th:href="">
+					<img th:src="@{/picture/logo-2x.png}" width="120" alt="">
+				</a>
+			</div>
+			<div class="sidebar-collapse">
+				<a href="#" class="sidebar-collapse-icon with-animation"><!-- add class "with-animation" if you want sidebar to have animation during expanding/collapsing transition -->
+					<i class="entypo-menu"></i>
+				</a>
+			</div>
+			<div class="sidebar-mobile-menu visible-xs">
+				<a href="#" class="with-animation"><!-- add class "with-animation" to support animation -->
+					<i class="entypo-menu"></i>
+				</a>
+			</div>
+		</header>
+		<ul id="main-menu" class="">
+			<!--第三个菜单-->
+			<li>
+				<a th:href="forms-main.html">
+					<i class="entypo-doc-text"></i>
+					<span>Forms</span>
+				</a>
+				<ul>
+					<li>
+						<a th:href="forms-main.html">
+							<span>Basic Elements</span>
+						</a>
+					</li>
+					<li>
+						<a th:href="forms-file-upload.html">
+							<span>File Upload</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<!--第四个菜单-->
+			<li>
+				<a th:href="tables-main.html">
+					<i class="entypo-window"></i>
+					<span>Tables</span>
+				</a>
+				<ul>
+					<li>
+						<a th:href="tables-datatable.html">
+							<span>Data Tables</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<!--第五个菜单-->
+			<li>
+				<a th:href="extra-icons.html">
+					<i class="entypo-bag"></i>
+					<span>Extra</span>
+				</a>
+				<ul>
+					<li>
+						<a th:href="extra-icons.html">
+							<span>Icons</span>
+							<span class="badge badge-success">3</span>
+						</a>
+						<ul>
+							<li>
+								<a th:href="extra-icons.html">
+									<span>Font Awesome</span>
+								</a>
+							</li>
+							<li>
+								<a th:href="extra-icons-entypo.html">
+									<span>Entypo</span>
+								</a>
+							</li>
+							<li>
+								<a th:href="extra-icons-glyphicons.html">
+									<span>Glyph Icons</span>
+								</a>
+							</li>
+						</ul>
+					</li>
+
+					<li>
+						<a th:href="extra-login.html">
+							<span>Login</span>
+						</a>
+					</li>
+					<li>
+						<a th:href="extra-members.html">
+							<span>Members</span>
+							<span class="badge badge-secondary badge-roundless">New</span>
+						</a>
+					</li>
+					<li>
+						<a th:href="extra-gallery.html">
+							<span>Gallery</span>
+						</a>
+						<ul>
+							<li>
+								<a th:href="extra-gallery.html">
+									<span>Albums</span>
+								</a>
+							</li>
+							<li>
+								<a th:href="extra-gallery-single.html">
+									<span>Single Album</span>
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a th:href="extra-profile.html">
+							<span>Profile</span>
+						</a>
+					</li>
+					<li>
+						<a th:href="extra-404.html">
+							<span>404 Page</span>
+						</a>
+					</li>
+					<li>
+						<a th:href="extra-search.html">
+							<span>Search Page</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<div class="main-content">
+
+		<div class="row">
+			<!-- Profile Info and Notifications -->
+			<div class="col-md-6 col-sm-8 clearfix">
+				<ul class="user-info pull-left pull-none-xsm">
+					<!-- Profile Info -->
+					<li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<img th:src="@{/picture/thumb-1-2x.png}" alt="" class="img-circle" width="44">
+							Art Ramadani
+						</a>
+						<ul class="dropdown-menu">
+							<!-- Reverse Caret -->
+							<li class="caret"></li>
+							<!-- 个人信息 -->
+							<li>
+								<a th:href="extra-timeline.html">
+									<i class="entypo-user"></i>
+									个人信息
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<i class="entypo-clipboard"></i>
+									修改密码
+								</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+
+
+			<!-- 退出登录 -->
+			<div class="col-md-6 col-sm-4 clearfix hidden-xs">
+				<ul class="list-inline links-list pull-right">
+					<li>
+						<a th:href="extra-login.html">
+							退出登录 <i class="entypo-logout right"></i>
+						</a>
+					</li>
+				</ul>
+
+			</div>
+
+		</div>
+
+<hr>
+			<ol class="breadcrumb bc-3">
+						<li>
+				<a th:href="index.html"><i class="entypo-home"></i>Home</a>
+			</li>
+					<li>
+			
+							<a th:href="extra-icons.html">Extra</a>
+					</li>
+				<li class="active">
+			
+							<strong>Gallery</strong>
+					</li>
+					</ol>
+			
+<script type="text/javascript">
+jQuery(document).ready(function($)
+{
+	// Handle the Change Cover
+	$(".gallery-env").on("click", ".album header .album-options", function(ev)
+	{
+		ev.preventDefault();
+		
+		// Sample Modal
+		$("#album-cover-options").modal('show');
+		
+		// Sample Crop Instance
+		var image_to_crop = $("#album-cover-options .croppable-image img"),
+			img_load = new Image();
+		
+		img_load.src = image_to_crop.attr('src');
+		img_load.onload = function()
+		{
+			if(image_to_crop.data('loaded'))
+				return false;
+				
+			image_to_crop.data('loaded', true);
+			
+			image_to_crop.Jcrop({
+				boxWidth: 410,
+				boxHeight: 265,
+				onSelect: function(cords)
+				{
+					// you can use these vars to save cropping of the image coordinates
+					var h = cords.h,
+						w = cords.w,
+						
+						x1 = cords.x,
+						x2 = cords.x2,
+						
+						y1 = cords.w,
+						y2 = cords.y2;
+					
+				}
+			}, function()
+			{
+				var jcrop = this;
+				
+				jcrop.animateTo([800, 600, 150, 50]);
+			});
+		}
+	});
+});
+</script>
+
+<div class="gallery-env">
+
+	<div class="row">
+	
+		<div class="col-sm-4">
+			
+			<article class="album">
+				
+				<header>
+					
+					<a th:href="extra-gallery-single.html">
+						<img th:src="@{/picture/album-thumb.jpg}">
+					</a>
+					
+					<a href="#" class="album-options">
+						<i class="entypo-cog"></i>
+						Change Cover
+					</a>
+				</header>
+				
+				<section class="album-info">
+					<h3><a th:href="extra-gallery-single.html">Album Title</a></h3>
+					
+					<p>Can curiosity may end shameless explained. True high on said mr on come. </p>
+				</section>
+				
+				<footer>
+					
+					<div class="album-images-count">
+						<i class="entypo-picture"></i>
+						55
+					</div>
+					
+					<div class="album-options">
+						<a href="#">
+							<i class="entypo-cog"></i>
+						</a>
+						
+						<a href="#">
+							<i class="entypo-trash"></i>
+						</a>
+					</div>
+					
+				</footer>
+				
+			</article>
+			
+		</div>
+		
+		<div class="col-sm-4">
+			
+			<article class="album">
+				
+				<header>
+					
+					<a th:href="extra-gallery-single.html">
+						<img th:src="@{/picture/album-thumb.jpg}">
+					</a>
+					
+					<a href="#" class="album-options">
+						<i class="entypo-cog"></i>
+						Change Cover
+					</a>
+				</header>
+				
+				<section class="album-info">
+					<h3><a th:href="extra-gallery-single.html">Album Title</a></h3>
+					
+					<p>Can curiosity may end shameless explained. True high on said mr on come. </p>
+				</section>
+				
+				<footer>
+					
+					<div class="album-images-count">
+						<i class="entypo-picture"></i>
+						27
+					</div>
+					
+					<div class="album-options">
+						<a href="#">
+							<i class="entypo-cog"></i>
+						</a>
+						
+						<a href="#">
+							<i class="entypo-trash"></i>
+						</a>
+					</div>
+					
+				</footer>
+				
+			</article>
+			
+		</div>
+		
+		<div class="col-sm-4">
+			
+			<article class="album">
+				
+				<header>
+					
+					<a th:href="extra-gallery-single.html">
+						<img th:src="@{/picture/album-thumb.jpg}">
+					</a>
+					
+					<a href="#" class="album-options">
+						<i class="entypo-cog"></i>
+						Change Cover
+					</a>
+				</header>
+				
+				<section class="album-info">
+					<h3><a th:href="extra-gallery-single.html">Album Title</a></h3>
+					
+					<p>Can curiosity may end shameless explained. True high on said mr on come. </p>
+				</section>
+				
+				<footer>
+					
+					<div class="album-images-count">
+						<i class="entypo-picture"></i>
+						43
+					</div>
+					
+					<div class="album-options">
+						<a href="#">
+							<i class="entypo-cog"></i>
+						</a>
+						
+						<a href="#">
+							<i class="entypo-trash"></i>
+						</a>
+					</div>
+					
+				</footer>
+				
+			</article>
+			
+		</div>
+	
+		<div class="col-sm-4">
+			
+			<article class="album">
+				
+				<header>
+					
+					<a th:href="extra-gallery-single.html">
+						<img th:src="@{/picture/album-thumb.jpg}">
+					</a>
+					
+					<a href="#" class="album-options">
+						<i class="entypo-cog"></i>
+						Change Cover
+					</a>
+				</header>
+				
+				<section class="album-info">
+					<h3><a th:href="extra-gallery-single.html">Album Title</a></h3>
+					
+					<p>Can curiosity may end shameless explained. True high on said mr on come. </p>
+				</section>
+				
+				<footer>
+					
+					<div class="album-images-count">
+						<i class="entypo-picture"></i>
+						18
+					</div>
+					
+					<div class="album-options">
+						<a href="#">
+							<i class="entypo-cog"></i>
+						</a>
+						
+						<a href="#">
+							<i class="entypo-trash"></i>
+						</a>
+					</div>
+					
+				</footer>
+				
+			</article>
+			
+		</div>
+		
+		<div class="col-sm-4">
+			
+			<article class="album">
+				
+				<header>
+					
+					<a th:href="extra-gallery-single.html">
+						<img th:src="@{/picture/album-thumb.jpg}">
+					</a>
+					
+					<a href="#" class="album-options">
+						<i class="entypo-cog"></i>
+						Change Cover
+					</a>
+				</header>
+				
+				<section class="album-info">
+					<h3><a th:href="extra-gallery-single.html">Album Title</a></h3>
+					
+					<p>Can curiosity may end shameless explained. True high on said mr on come. </p>
+				</section>
+				
+				<footer>
+					
+					<div class="album-images-count">
+						<i class="entypo-picture"></i>
+						67
+					</div>
+					
+					<div class="album-options">
+						<a href="#">
+							<i class="entypo-cog"></i>
+						</a>
+						
+						<a href="#">
+							<i class="entypo-trash"></i>
+						</a>
+					</div>
+					
+				</footer>
+				
+			</article>
+			
+		</div>
+		
+		<div class="col-sm-4">
+			
+			<article class="album">
+				
+				<header>
+					
+					<a th:href="extra-gallery-single.html">
+						<img th:src="@{/picture/album-thumb.jpg}">
+					</a>
+					
+					<a href="#" class="album-options">
+						<i class="entypo-cog"></i>
+						Change Cover
+					</a>
+				</header>
+				
+				<section class="album-info">
+					<h3><a th:href="extra-gallery-single.html">Album Title</a></h3>
+					
+					<p>Can curiosity may end shameless explained. True high on said mr on come. </p>
+				</section>
+				
+				<footer>
+					
+					<div class="album-images-count">
+						<i class="entypo-picture"></i>
+						8
+					</div>
+					
+					<div class="album-options">
+						<a href="#">
+							<i class="entypo-cog"></i>
+						</a>
+						
+						<a href="#">
+							<i class="entypo-trash"></i>
+						</a>
+					</div>
+					
+				</footer>
+				
+			</article>
+			
+		</div>
+	
+		<div class="col-sm-4">
+			
+			<article class="album">
+				
+				<header>
+					
+					<a th:href="extra-gallery-single.html">
+						<img th:src="@{/picture/album-thumb.jpg}">
+					</a>
+					
+					<a href="#" class="album-options">
+						<i class="entypo-cog"></i>
+						Change Cover
+					</a>
+				</header>
+				
+				<section class="album-info">
+					<h3><a th:href="extra-gallery-single.html">Album Title</a></h3>
+					
+					<p>Can curiosity may end shameless explained. True high on said mr on come. </p>
+				</section>
+				
+				<footer>
+					
+					<div class="album-images-count">
+						<i class="entypo-picture"></i>
+						25
+					</div>
+					
+					<div class="album-options">
+						<a href="#">
+							<i class="entypo-cog"></i>
+						</a>
+						
+						<a href="#">
+							<i class="entypo-trash"></i>
+						</a>
+					</div>
+					
+				</footer>
+				
+			</article>
+			
+		</div>
+		
+		<div class="col-sm-4">
+			
+			<article class="album">
+				
+				<header>
+					
+					<a th:href="extra-gallery-single.html">
+						<img th:src="@{/picture/album-thumb.jpg}">
+					</a>
+					
+					<a href="#" class="album-options">
+						<i class="entypo-cog"></i>
+						Change Cover
+					</a>
+				</header>
+				
+				<section class="album-info">
+					<h3><a th:href="extra-gallery-single.html">Album Title</a></h3>
+					
+					<p>Can curiosity may end shameless explained. True high on said mr on come. </p>
+				</section>
+				
+				<footer>
+					
+					<div class="album-images-count">
+						<i class="entypo-picture"></i>
+						19
+					</div>
+					
+					<div class="album-options">
+						<a href="#">
+							<i class="entypo-cog"></i>
+						</a>
+						
+						<a href="#">
+							<i class="entypo-trash"></i>
+						</a>
+					</div>
+					
+				</footer>
+				
+			</article>
+			
+		</div>
+		
+		<div class="col-sm-4">
+			
+			<article class="album">
+				
+				<header>
+					
+					<a th:href="extra-gallery-single.html">
+						<img th:src="@{/picture/album-thumb.jpg}">
+					</a>
+					
+					<a href="#" class="album-options">
+						<i class="entypo-cog"></i>
+						Change Cover
+					</a>
+				</header>
+				
+				<section class="album-info">
+					<h3><a th:href="extra-gallery-single.html">Album Title</a></h3>
+					
+					<p>Can curiosity may end shameless explained. True high on said mr on come. </p>
+				</section>
+				
+				<footer>
+					
+					<div class="album-images-count">
+						<i class="entypo-picture"></i>
+						14
+					</div>
+					
+					<div class="album-options">
+						<a href="#">
+							<i class="entypo-cog"></i>
+						</a>
+						
+						<a href="#">
+							<i class="entypo-trash"></i>
+						</a>
+					</div>
+					
+				</footer>
+				
+			</article>
+			
+		</div>
+	
+	</div>
+	
+</div><!-- Footer -->
+</div>
+	
+	
+<div id="chat" class="fixed" data-current-user="Art Ramadani" data-order-by-status="1" data-max-chat-history="25">
+	
+	<div class="chat-inner">
+	
+		
+		<h2 class="chat-header">
+			<a href="#" class="chat-close" data-animate="1"><i class="entypo-cancel"></i></a>
+			
+			<i class="entypo-users"></i>
+			Chat
+			<span class="badge badge-success is-hidden">0</span>
+		</h2>
+		
+		
+		<div class="chat-group" id="group-1">
+			<strong>Favorites</strong>
+			
+			<a href="#" id="sample-user-123" data-conversation-history="#sample_history"><span class="user-status is-online"></span> <em>Catherine J. Watkins</em></a>
+			<a href="#"><span class="user-status is-online"></span> <em>Nicholas R. Walker</em></a>
+			<a href="#"><span class="user-status is-busy"></span> <em>Susan J. Best</em></a>
+			<a href="#"><span class="user-status is-offline"></span> <em>Brandon S. Young</em></a>
+			<a href="#"><span class="user-status is-idle"></span> <em>Fernando G. Olson</em></a>
+		</div>
+		
+		
+		<div class="chat-group" id="group-2">
+			<strong>Work</strong>
+			
+			<a href="#"><span class="user-status is-offline"></span> <em>Robert J. Garcia</em></a>
+			<a href="#" data-conversation-history="#sample_history_2"><span class="user-status is-offline"></span> <em>Daniel A. Pena</em></a>
+			<a href="#"><span class="user-status is-busy"></span> <em>Rodrigo E. Lozano</em></a>
+		</div>
+		
+		
+		<div class="chat-group" id="group-3">
+			<strong>Social</strong>
+			
+			<a href="#"><span class="user-status is-busy"></span> <em>Velma G. Pearson</em></a>
+			<a href="#"><span class="user-status is-offline"></span> <em>Margaret R. Dedmon</em></a>
+			<a href="#"><span class="user-status is-online"></span> <em>Kathleen M. Canales</em></a>
+			<a href="#"><span class="user-status is-offline"></span> <em>Tracy J. Rodriguez</em></a>
+		</div>
+	
+	</div>
+	
+	<!-- conversation template -->
+	<div class="chat-conversation">
+		
+		<div class="conversation-header">
+			<a href="#" class="conversation-close"><i class="entypo-cancel"></i></a>
+			
+			<span class="user-status"></span>
+			<span class="display-name"></span> 
+			<small></small>
+		</div>
+		
+		<ul class="conversation-body">	
+		</ul>
+		
+		<div class="chat-textarea">
+			<textarea class="form-control autogrow" placeholder="Type your message"></textarea>
+		</div>
+		
+	</div>
+	
+</div>
+
+
+<!-- Chat Histories -->
+<ul class="chat-history" id="sample_history">
+	<li>
+		<span class="user">Art Ramadani</span>
+		<p>Are you here?</p>
+		<span class="time">09:00</span>
+	</li>
+	
+	<li class="opponent">
+		<span class="user">Catherine J. Watkins</span>
+		<p>This message is pre-queued.</p>
+		<span class="time">09:25</span>
+	</li>
+	
+	<li class="opponent">
+		<span class="user">Catherine J. Watkins</span>
+		<p>Whohoo!</p>
+		<span class="time">09:26</span>
+	</li>
+	
+	<li class="opponent unread">
+		<span class="user">Catherine J. Watkins</span>
+		<p>Do you like it?</p>
+		<span class="time">09:27</span>
+	</li>
+</ul>
+
+
+
+
+<!-- Chat Histories -->
+<ul class="chat-history" id="sample_history_2">
+	<li class="opponent unread">
+		<span class="user">Daniel A. Pena</span>
+		<p>I am going out.</p>
+		<span class="time">08:21</span>
+	</li>
+	
+	<li class="opponent unread">
+		<span class="user">Daniel A. Pena</span>
+		<p>Call me when you see this message.</p>
+		<span class="time">08:27</span>
+	</li>
+</ul>	
+	</div>
+
+<!-- Album Cover Settings Modal -->
+<div class="modal fade custom-width" id="album-cover-options">
+	<div class="modal-dialog" style="width: 65%;">
+		<div class="modal-content">
+			
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Edit: <strong>Album Title</strong></h4>
+			</div>
+			
+			<div class="modal-body">
+				
+				<div class="row">
+					<div class="col-sm-6">
+										
+						<div class="row">
+							<div class="col-md-12">
+								
+								<h4 class="margin-top-none">Crop Image</h4>
+								
+								<div class="croppable-image">
+									<img th:src="@{/picture/sample-crop.jpg}" class="img-responsive">
+								</div>
+								
+							</div>
+						</div>
+						
+					</div>
+					
+					<div class="col-sm-6">
+					
+						<div class="row">
+							<div class="col-md-12">
+								
+								<div class="form-group">
+									<label for="field-1" class="control-label">Title</label>
+									
+									<input type="text" class="form-control" id="field-1" placeholder="Enter album title">
+								</div>	
+								
+							</div>
+						</div>
+					
+						<div class="row">
+							<div class="col-md-12">
+								
+								<div class="form-group">
+									<label for="field-1" class="control-label">Tags</label>
+									
+									<input type="text" class="form-control" id="field-3" placeholder="Tags">
+								</div>	
+								
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-md-12">
+								
+								<div class="form-group">
+									<label for="field-1" class="control-label">Description</label>
+									
+									<textarea class="form-control autogrow" id="field-2" placeholder="Enter album description" style="min-height: 120px;"></textarea>
+								</div>	
+								
+							</div>
+						</div>
+						
+					</div>
+				</div>
+				
+				
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-success btn-icon">
+					<i class="entypo-check"></i>
+					Apply Changes
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Album Image Settings Modal -->
+<div class="modal fade" id="album-image-options">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			
+			<div class="gallery-image-edit-env">
+				<img th:src="@{/picture/sample-crop-2.png}" class="img-responsive">
+				
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			
+			<div class="modal-body">
+			
+					
+						<div class="row">
+							<div class="col-md-12">
+								
+								<div class="form-group">
+									<label for="field-1" class="control-label">Title</label>
+									
+									<input type="text" class="form-control" id="field-1" placeholder="Enter image title">
+								</div>	
+								
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-md-12">
+								
+								<div class="form-group">
+									<label for="field-1" class="control-label">Description</label>
+									
+									<textarea class="form-control autogrow" id="field-2" placeholder="Enter image description" style="min-height: 80px;"></textarea>
+								</div>	
+								
+							</div>
+						</div>
+						
+				
+				
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-success btn-icon">
+					<i class="entypo-check"></i>
+					Apply Changes
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+	<link rel="stylesheet" th:href="@{/css/jquery.Jcrop.min.css}">
+
+	<!-- Bottom Scripts -->
+	<script th:src="@{/js/main-gsap.js}"></script>
+	<script th:src="@{/js/jquery-ui-1.10.3.minimal.min.js}"></script>
+	<script th:src="@{/js/bootstrap.js}"></script>
+	<script th:src="@{/js/joinable.js}"></script>
+	<script th:src="@{/js/resizeable.js}"></script>
+	<script th:src="@{/js/neon-api.js}"></script>
+	<script th:src="@{/js/jquery.Jcrop.min.js}"></script>
+	<script th:src="@{/js/neon-chat.js}"></script>
+	<script th:src="@{/js/neon-custom.js}"></script>
+	<script th:src="@{/js/neon-demo.js}"></script>
+
+</body>
+</html>

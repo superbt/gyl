@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Neon Admin Panel">
+    <meta name="author" content="">
+
+    <title>Neon | Data Tables</title>
+
+
+    <link rel="stylesheet" th:href="@{/css/jquery-ui-1.10.3.custom.min.css}">
+    <link rel="stylesheet" th:href="@{/css/entypo.css}">
+    <link rel="stylesheet" th:href="@{/css/css.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/neon-core.css}">
+    <link rel="stylesheet" th:href="@{/css/neon-theme.css}">
+    <link rel="stylesheet" th:href="@{/css/neon-forms.css}">
+    <link rel="stylesheet" th:href="@{/css/custom.css}">
+
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+
+    <!--[if lt IE 9]>
+    <script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js} IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+</head>
+<body class="page-body" data-url="http://neon.dev">
+
+<div class="page-container">
+    <!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
+
+	<div class="sidebar-menu">
+		<header class="logo-env">
+			<!-- logo -->
+			<div class="logo">
+				<a th:href="@{/api/index}">
+					<img th:src="@{/picture/logo-2x.png}" width="120" alt="">
+				</a>
+			</div>
+			<div class="sidebar-collapse">
+				<a href="#" class="sidebar-collapse-icon with-animation">
+					<!-- add class "with-animation" if you want sidebar to have animation during expanding/collapsing transition -->
+					<i class="entypo-menu"></i>
+				</a>
+			</div>
+			<div class="sidebar-mobile-menu visible-xs">
+				<a href="#" class="with-animation"><!-- add class "with-animation" to support animation -->
+					<i class="entypo-menu"></i>
+				</a>
+			</div>
+		</header>
+		<ul id="main-menu" class="">
+			<!--用户管理-->
+			<!--th:if="${session.list.contains('admin')} and ${session.list.contains('manager')}"-->
+			<li th:if="${session.list.contains('admin')} and ${session.list.contains('manager')}">
+				<a th:href="forms-main.html">
+					<i class="entypo-doc-text"></i>
+					<span>用户管理</span>
+				</a>
+				<ul>
+					<li>
+						<a th:href="@{/api/users}">
+							<span>用户列表</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<!--角色管理-->
+			<li th:if="${session.list.contains('admin')}">
+				<a th:href="forms-main.html">
+					<i class="entypo-doc-text"></i>
+					<span>角色管理</span>
+				</a>
+				<ul>
+					<li>
+						<a th:href="@{/api/roles}">
+							<span>角色列表</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<!--商品管理-->
+			<li>
+				<a th:href="forms-main.html">
+					<i class="entypo-doc-text"></i>
+					<span>商品管理</span>
+				</a>
+				<ul>
+					<li>
+						<a th:href="@{/api/goods}">
+							<span>商品列表</span>
+						</a>
+					</li>
+					<li>
+						<a th:href="@{/api/categorys}">
+							<span>分类列表</span>
+						</a>
+					</li>
+					<li>
+						<a th:href="@{/api/orders}">
+							<span>订单列表</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<!--新闻管理-->
+			<li>
+				<a th:href="forms-main.html">
+					<i class="entypo-doc-text"></i>
+					<span>新闻管理</span>
+				</a>
+				<ul>
+					<li>
+						<a th:href="@{/api/news}">
+							<span>新闻列表</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+    <div class="main-content">
+
+		<div class="row">
+			<!-- Profile Info and Notifications -->
+			<div class="col-md-6 col-sm-8 clearfix">
+				<ul class="user-info pull-left pull-none-xsm">
+					<!-- Profile Info -->
+					<li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<img th:src="@{${session.user.avatar}}" alt="da" class="img-circle" width="44">
+							<a href="" th:text="${session.user.nickName}"></a>
+						</a>
+						<ul class="dropdown-menu">
+							<!-- Reverse Caret -->
+							<li class="caret"></li>
+							<!-- 个人信息 -->
+							<li>
+								<a th:href="extra-timeline.html">
+									<i class="entypo-user"></i>
+									个人信息
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<i class="entypo-clipboard"></i>
+									修改密码
+								</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+
+
+			<!-- 退出登录 -->
+			<div class="col-md-6 col-sm-4 clearfix hidden-xs">
+				<ul class="list-inline links-list pull-right">
+					<li>
+						<a th:href="@{/api/logout}">
+							退出登录 <i class="entypo-logout right"></i>
+						</a>
+					</li>
+				</ul>
+
+			</div>
+
+		</div>
+
+        <hr>
+        <ol class="breadcrumb bc-3">
+            <li>
+                <a th:href="@{/api/index}"><i class="entypo-home"></i>首页</a>
+            </li>
+            <li>
+                <a th:href="tables-main.html">用户管理</a>
+            </li>
+            <li class="active">
+                <strong>用户列表</strong>
+            </li>
+        </ol>
+
+
+        <h3>用户列表</h3>
+
+        <table class="table table-bordered table-striped datatable" id="table-2">
+            <thead>
+            <tr>
+                <th>
+                    <div class="checkbox checkbox-replace">
+                        <input type="checkbox" id="chk-1">
+                    </div>
+                </th>
+                <th>用户名</th>
+				<th>性别</th>
+                <th>手机号</th>
+                <th>邮箱</th>
+				<th>状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="user:${list}">
+                <td>
+                    <div class="checkbox checkbox-replace">
+                        <input type="checkbox" id="chk-1">
+                    </div>
+                </td>
+                <td th:text="${user.nickName}">Randy S. Smith</td>
+                <td>
+					<a href="" th:if="${user.sex ==1}">男</a>
+					<a href="" th:if="${user.sex ==0}">女</a>
+				</td>
+                <td th:text="${user.phone}">Social</td>
+				<td th:text="${user.email}">8.7</td>
+				<td>
+					<a href="" th:if="${user.status == 1}">正常</a>
+					<a href="" th:if="${user.status == 2}">冻结</a>
+				</td>
+                <td>
+                    <a th:href="@{/api/deleteRoleForUser/{id}/(id=${user.id})}" class="btn btn-danger btn-sm btn-icon icon-left">
+                        <i class="entypo-cancel"></i>
+                        删除
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+<!--        <a th:href="@{/api/add-role}" class="btn btn-primary">-->
+<!--            <i class="entypo-plus"></i>-->
+<!--            分配角色-->
+<!--        </a>-->
+		<a href="javascript:;" onclick="jQuery('#modal-6').modal('show', {backdrop: '@{'});" class="btn btn-primary">分配角色</a>
+    </div>
+</div>
+
+<!-- Modal 6 (Long Modal)-->
+<div class="modal fade" id="modal-6">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form role="form" th:action="@{/api/distributionRole}" th:method="post" class="form-horizontal form-groups-bordered">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">分配角色</h4>
+				</div>
+
+				<div class="modal-body">
+
+					<div class="row">
+						<div class="form-group">
+							<label class="col-sm-3 control-label">选择用户</label>
+
+							<div class="col-sm-6">
+								<select class="form-control" name="userId">
+									<option th:each="users:${session.allUsersUnlessMe}" th:value="${users.id}" th:text="${users.nickName}"></option>
+								</select>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="form-group">
+							<label class="col-sm-3 control-label">选择角色</label>
+							<div class="col-sm-6">
+								<select class="form-control" name="roleId">
+									<option th:each="roles:${session.allRoles}" th:value="${roles.id}" th:text="${roles.name}">正常</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="submit" class="btn btn-info" >保存</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<link rel="stylesheet" th:href="@{/css/datatables.responsive.css}">
+<link rel="stylesheet" th:href="@{/css/select2-bootstrap.css}">
+<link rel="stylesheet" th:href="@{/css/select2.css}">
+
+<!-- Bottom Scripts -->
+<script th:src="@{/js/main-gsap.js}"></script>
+<script th:src="@{/js/jquery-ui-1.10.3.minimal.min.js}"></script>
+<script th:src="@{/js/bootstrap.js}"></script>
+<script th:src="@{/js/joinable.js}"></script>
+<script th:src="@{/js/resizeable.js}"></script>
+<script th:src="@{/js/neon-api.js}"></script>
+<script th:src="@{/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/js/TableTools.min.js}"></script>
+<script th:src="@{/js/dataTables.bootstrap.js}"></script>
+<script th:src="@{/js/jquery.dataTables.columnFilter.js}"></script>
+<script th:src="@{/js/lodash.min.js}"></script>
+<script th:src="@{/js/datatables.responsive.js}"></script>
+<script th:src="@{/js/select2.min.js}"></script>
+<script th:src="@{/js/neon-chat.js}"></script>
+<script th:src="@{/js/neon-custom.js}"></script>
+<script th:src="@{/js/neon-demo.js}"></script>
+
+</body>
+</html>

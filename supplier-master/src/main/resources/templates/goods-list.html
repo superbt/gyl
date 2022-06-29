@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Neon Admin Panel">
+    <meta name="author" content="">
+
+    <title>Neon | Gallery</title>
+
+
+    <link rel="stylesheet" th:href="@{/css/jquery-ui-1.10.3.custom.min.css}">
+    <link rel="stylesheet" th:href="@{/css/entypo.css}">
+    <link rel="stylesheet" th:href="@{/css/css.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/neon-core.css}">
+    <link rel="stylesheet" th:href="@{/css/neon-theme.css}">
+    <link rel="stylesheet" th:href="@{/css/neon-forms.css}">
+    <link rel="stylesheet" th:href="@{/css/custom.css}">
+
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+
+    <!--[if lt IE 9]>
+    <script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js} IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+</head>
+<body class="page-body" data-url="http://neon.dev">
+
+<div class="page-container">
+    <!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
+
+    <div class="sidebar-menu">
+        <header class="logo-env">
+            <!-- logo -->
+            <div class="logo">
+                <a th:href="@{/api/index}">
+                    <img th:src="@{/picture/logo-2x.png}" width="120" alt="">
+                </a>
+            </div>
+            <div class="sidebar-collapse">
+                <a href="#" class="sidebar-collapse-icon with-animation">
+                    <!-- add class "with-animation" if you want sidebar to have animation during expanding/collapsing transition -->
+                    <i class="entypo-menu"></i>
+                </a>
+            </div>
+            <div class="sidebar-mobile-menu visible-xs">
+                <a href="#" class="with-animation"><!-- add class "with-animation" to support animation -->
+                    <i class="entypo-menu"></i>
+                </a>
+            </div>
+        </header>
+        <ul id="main-menu" class="">
+            <!--用户管理-->
+            <!--th:if="${session.list.contains('admin')} and ${session.list.contains('manager')}"-->
+            <li th:if="${session.list.contains('admin')} and ${session.list.contains('manager')}">
+                <a th:href="forms-main.html">
+                    <i class="entypo-doc-text"></i>
+                    <span>用户管理</span>
+                </a>
+                <ul>
+                    <li>
+                        <a th:href="@{/api/users}">
+                            <span>用户列表</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!--角色管理-->
+            <li th:if="${session.list.contains('admin')}">
+                <a th:href="forms-main.html">
+                    <i class="entypo-doc-text"></i>
+                    <span>角色管理</span>
+                </a>
+                <ul>
+                    <li>
+                        <a th:href="@{/api/roles}">
+                            <span>角色列表</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!--商品管理-->
+            <li>
+                <a th:href="forms-main.html">
+                    <i class="entypo-doc-text"></i>
+                    <span>商品管理</span>
+                </a>
+                <ul>
+                    <li>
+                        <a th:href="@{/api/goods}">
+                            <span>商品列表</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/api/categorys}">
+                            <span>分类列表</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/api/orders}">
+                            <span>订单列表</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!--新闻管理-->
+            <li>
+                <a th:href="forms-main.html">
+                    <i class="entypo-doc-text"></i>
+                    <span>新闻管理</span>
+                </a>
+                <ul>
+                    <li>
+                        <a th:href="@{/api/news}">
+                            <span>新闻列表</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="main-content">
+
+        <div class="row">
+            <!-- Profile Info and Notifications -->
+            <div class="col-md-6 col-sm-8 clearfix">
+                <ul class="user-info pull-left pull-none-xsm">
+                    <!-- Profile Info -->
+                    <li class="profile-info dropdown">
+                        <!-- add class "pull-right" if you want to place this from right -->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img th:src="@{${session.user.avatar}}" alt="da" class="img-circle" width="44">
+                            <a href="" th:text="${session.user.nickName}"></a>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- Reverse Caret -->
+                            <li class="caret"></li>
+                            <!-- 个人信息 -->
+                            <li>
+                                <a th:href="extra-timeline.html">
+                                    <i class="entypo-user"></i>
+                                    个人信息
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="entypo-clipboard"></i>
+                                    修改密码
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+
+            <!-- 退出登录 -->
+            <div class="col-md-6 col-sm-4 clearfix hidden-xs">
+                <ul class="list-inline links-list pull-right">
+                    <li>
+                        <a th:href="@{/api/logout}">
+                            退出登录 <i class="entypo-logout right"></i>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+
+        <hr>
+        <ol class="breadcrumb bc-3">
+            <li>
+                <a th:href="index.html"><i class="entypo-home"></i>Home</a>
+            </li>
+            <li>
+
+                <a th:href="extra-icons.html">Extra</a>
+            </li>
+            <li class="active">
+
+                <strong>Gallery</strong>
+            </li>
+        </ol>
+
+        <script type="text/javascript">
+            jQuery(document).ready(function ($) {
+                // Handle the Change Cover
+                $(".gallery-env").on("click", ".album header .album-options", function (ev) {
+                    ev.preventDefault();
+
+                    // Sample Modal
+                    $("#album-cover-options").modal('show');
+
+                    // Sample Crop Instance
+                    var image_to_crop = $("#album-cover-options .croppable-image img"),
+                        img_load = new Image();
+
+                    img_load.src = image_to_crop.attr('src');
+                    img_load.onload = function () {
+                        if (image_to_crop.data('loaded'))
+                            return false;
+
+                        image_to_crop.data('loaded', true);
+
+                        image_to_crop.Jcrop({
+                            boxWidth: 410,
+                            boxHeight: 265,
+                            onSelect: function (cords) {
+                                // you can use these vars to save cropping of the image coordinates
+                                var h = cords.h,
+                                    w = cords.w,
+
+                                    x1 = cords.x,
+                                    x2 = cords.x2,
+
+                                    y1 = cords.w,
+                                    y2 = cords.y2;
+
+                            }
+                        }, function () {
+                            var jcrop = this;
+
+                            jcrop.animateTo([800, 600, 150, 50]);
+                        });
+                    }
+                });
+            });
+        </script>
+        <div>
+            <a th:href="@{/api/add-goods}" class="btn btn-primary">
+                <i class="entypo-plus"></i>
+                添加商品
+            </a>
+        </div>
+        <div class="gallery-env">
+
+            <div class="row">
+                <div class="col-sm-4" th:each="good:${goods}">
+
+                    <article class="album">
+
+                        <header>
+
+                            <a th:href="extra-gallery-single.html">
+                                <img th:src="@{${good.prams}}">
+                            </a>
+
+                            <a href="#" class="album-options">
+                                <i class="entypo-cog"></i>
+                                Change Cover
+                            </a>
+                        </header>
+
+                        <section class="album-info">
+                            <h3><a th:href="extra-gallery-single.html" th:text="${good.title}">Album Title</a></h3> <br>
+
+                            <h6 th:text="${good.desc}">Can curiosity may end shameless explained. True high on said mr on come. </h6>
+                        </section>
+
+                        <footer>
+
+                            <div class="album-images-count" th:text="${good.price}">
+                                <i class="entypo-picture"></i>
+                                55
+                            </div>
+
+                            <div class="album-options" th:if="${session.list.contains('admin')}">
+                                <a th:href="@{/api/getByIdForGoods/{id}/(id=${good.id})}">
+                                    <i style="color: #0c3c50" class="entypo-cog"></i>
+                                </a>
+
+                                <a th:href="@{/api/deleteForGoods/{id}/(id=${good.id})}">
+                                    <i style="color: red" class="entypo-trash"></i>
+                                </a>
+                            </div>
+
+                        </footer>
+
+                    </article>
+
+                </div>
+            </div>
+
+        </div><!-- Footer -->
+    </div>
+</div>
+
+<link rel="stylesheet" th:href="@{/css/jquery.Jcrop.min.css}">
+
+<!-- Bottom Scripts -->
+<script th:src="@{/js/main-gsap.js}"></script>
+<script th:src="@{/js/jquery-ui-1.10.3.minimal.min.js}"></script>
+<script th:src="@{/js/bootstrap.js}"></script>
+<script th:src="@{/js/joinable.js}"></script>
+<script th:src="@{/js/resizeable.js}"></script>
+<script th:src="@{/js/neon-api.js}"></script>
+<script th:src="@{/js/jquery.Jcrop.min.js}"></script>
+<script th:src="@{/js/neon-chat.js}"></script>
+<script th:src="@{/js/neon-custom.js}"></script>
+<script th:src="@{/js/neon-demo.js}"></script>
+
+</body>
+</html>
